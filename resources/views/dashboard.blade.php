@@ -1,27 +1,2 @@
-<x-app-layout>
-    <x-slot name="header">
-        <div class="text-gray-800 flex justify-between items-center">
-            <h2 class="font-semibold text-xl leading-tight">
-                {{ __('Companies') }}
-            </h2>
-            <a href="#" class="p-3 active:scale-95 transition text-sm text-white rounded-full bg-indigo-500 hover:bg-indigo-600">
-                Add Company
-            </a>
-        </div>
-    </x-slot>
-
-    <div class="py-6">
-        <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-3">
-            @foreach($companies as $company)
-                <x-company-card :$company>
-                </x-company-card>
-            @endforeach
-        </div>
-    </div>
-
-    <div class="py-6">
-        <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
-            {{ $companies->links() }}
-        </div>
-    </div>
-</x-app-layout>
+<x-overview-layout :heading="'Companies'" :itemName="'Company'" :itemRoute="'#'" :array="$companies">
+</x-overview-layout>

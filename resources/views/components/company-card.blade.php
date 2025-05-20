@@ -1,18 +1,32 @@
-@props(['company'])
+@props(['item', 'itemName'])
 
 <div class="bg-white overflow-hidden shadow-sm rounded-lg flex">
+  @if (!empty($item->logo))
     <div class="min-h-[100px] h-full min-w-[100px] max-w-[200px] p-2">
       <img class="h-full object-contain" 
-          src="{{ $company->logo }}" alt="Company Logo">
+        src="{{ $item->logo }}" alt="Company Logo">
     </div>
-    <div class="p-6 text-gray-900 flex flex-col gap-3 grow">
-        <p>{{ $company->name }}</p>
-        <p>{{ $company->email }}</p>
-        <div class="flex flex-wrap gap-3">
-          <a class="p-3 active:scale-95 transition text-sm text-white rounded-full bg-indigo-500 hover:bg-indigo-600" 
-            href="{{ $company->website }}">Visit Website</a>
-          <a class="p-3 active:scale-95 transition text-sm text-white rounded-full bg-indigo-500 hover:bg-indigo-600"
-            href="company/{{ $company->id }}">View Company</a>
-        </div>
+  @endif
+  <div class="p-6 text-gray-900 flex flex-col gap-3 grow">
+    @if (!empty($item->name))
+      <p>{{ $item->name }}</p>
+    @elseif (!empty($item->first_name) && !empty($item->last_name))
+      <p>{{ $item->first_name . " " . $item->last_name }}</p>
+    @endif
+    <p>{{ $item->email }}</p>
+    @if (!empty($item->phone_number))
+      <p>{{ $item->phone_number }}</p>
+    @endif
+    @if (!empty($item->company))
+      <p>{{ $item->company->name }}</p>
+    @endif
+    <div class="flex flex-wrap gap-3">
+      @if (!empty($item->website))
+        <a class="p-3 active:scale-95 transition text-sm text-white rounded-full bg-indigo-500 hover:bg-indigo-600" 
+          href="{{ $item->website }}">Visit Website</a>
+      @endif
+      <a class="p-3 active:scale-95 transition text-sm text-white rounded-full bg-indigo-500 hover:bg-indigo-600"
+        href="company/{{ $item->id }}">View {{ $itemName }}</a>
     </div>
+  </div>
 </div>
