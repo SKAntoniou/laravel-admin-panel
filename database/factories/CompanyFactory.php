@@ -17,9 +17,9 @@ class CompanyFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
+            'name' => fake()->company(),
             'email' => fake()->unique()->safeEmail(),
-            'logo' => 'https://picsum.photos/seed/' . rand(0, 100000) . '/100',
+            'logo' => 'https://picsum.photos/seed/' . rand(0, 100000) . '/300',
             'website' => '#'
         ];
     }
