@@ -32,4 +32,9 @@ class CompanyController extends Controller
 
     return redirect('/');
   }
+
+  public function update(Request $request)
+  {
+    
+  }
 }
