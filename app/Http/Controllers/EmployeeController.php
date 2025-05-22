@@ -9,7 +9,7 @@ class EmployeeController extends Controller
 {
     public function index()
     {
-        $employees = Employee::latest()->with(['company'])->paginate(10);
+        $employees = Employee::latest()->with(['company'])->paginate(12);
 
         return view('employees', [
             'employees' => $employees

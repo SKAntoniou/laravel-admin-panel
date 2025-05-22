@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Company;
 
 class DashboardController extends Controller
@@ -15,5 +14,7 @@ class DashboardController extends Controller
             'companies' => $companies
         ]);
     }
+
+
 
 }
