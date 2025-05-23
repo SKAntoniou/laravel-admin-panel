@@ -8,7 +8,7 @@
         <x-forms.input label="Name" name="name" />
         <x-forms.input label="Email" name="email" type="email" />
         <x-forms.input label="Website" name="website"/>
-        <x-forms.file-upload :labelTop="'Upload logo'" :labelBtn="'Choose File'" :name="''" />
+        <x-forms.file-upload :labelTop="'Upload logo'" :labelBtn="'Choose File'" :name="'logo'" />
         
       </div>
 

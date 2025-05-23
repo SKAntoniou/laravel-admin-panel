@@ -18,6 +18,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/company/new', [CompanyController::class, 'create'])->name('company.new');
     Route::post('/company/new', [CompanyController::class, 'store'])->name('company.new');
+    Route::get('/company/{company}/edit', [CompanyController::class, 'edit'])->name('company.edit');
+    Route::post('/company/{company}/edit', [CompanyController::class, 'update'])->name('company.update');
 });
 
 require __DIR__.'/auth.php';

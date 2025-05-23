@@ -26,7 +26,7 @@
           href="{{ $item->website }}">Visit Website</a>
       @endif
       <a class="p-3 active:scale-95 transition text-sm text-white rounded-full bg-indigo-500 hover:bg-indigo-600"
-        href="company/{{ $item->id }}">View {{ $itemName }}</a>
+        href="company/{{ $item->id }}/edit">View {{ $itemName }}</a>
     </div>
   </div>
 </div>
