@@ -6,8 +6,19 @@
         <h2 class="text-base/7 font-semibold text-gray-900">Add Employee</h2>
         <input type="hidden" name="redirect_to" value="{{ request('back', url()->previous()) }}">
         
-        @if (empty($companies))
-          <h3>There are no companies this employee could be associated with. Please make a company first.</h3>
+        @if ($companies->isEmpty())
+          <div class="grid gap-2 md:grid-cols-[3fr,1fr]">
+            <div class="flex items-center justify-center">
+              <p class="grow text-center rounded-md bg-red-500 px-3 py-2 text-lg font-semibold text-white shadow-xs">
+                There are no companies this employee could be associated with.<br>
+              Please make a company first.
+              </p>
+            </div>
+
+            <a href="{{ route('company.new') }}" class="flex items-center justify-center grow rounded-md px-3 py-2 text-lg font-semibold text-white shadow-xs active:scale-95 transition text-white  bg-indigo-500 hover:bg-indigo-600">
+              <span class="text-center">Create Company</span>
+            </a>
+          </div>
         @endif
 
         <div>
