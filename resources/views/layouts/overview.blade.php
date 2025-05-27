@@ -1,4 +1,4 @@
-@props(['heading', 'itemName', 'itemRoute', 'array', 'gridBreakpoints'])
+@props(['heading', 'itemName', 'itemRoute', 'array', 'gridBreakpoints', 'type'])
 
 <x-app-layout>
     <x-slot name="header">
@@ -15,7 +15,7 @@
     <div class="py-6">
         <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 grid grid-cols-1 gap-3 {{ $gridBreakpoints }}">
             @foreach($array as $item)
-                <x-company-card :$item :$itemName>
+                <x-company-card :$item :$itemName :$type>
                 </x-company-card>
             @endforeach
         </div>

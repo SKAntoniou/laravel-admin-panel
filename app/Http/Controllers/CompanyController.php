@@ -30,7 +30,7 @@ class CompanyController extends Controller
       'logo' => $logoPath
     ]);
 
-    return redirect('/');
+    return redirect($request['redirect_to']);
   }
 
   public function edit(Company $company)
@@ -60,7 +60,12 @@ class CompanyController extends Controller
     
     Company::where('id', $attributes['id'])->update($attributesToUpdate);
 
-    return redirect('/company/' . $attributes['id']);
+    return redirect($request['redirect_to']);
   }
 
+  public function delete(Request $request, Company $company)
+  {
+    $company->delete();
+    return redirect($request['redirect_to']);
+  }
 }
