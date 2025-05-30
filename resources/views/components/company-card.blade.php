@@ -4,7 +4,7 @@
   @if (!empty($item->logo))
     <div class="min-h-[100px] max-h-[200px] min-w-[100px] max-w-[200px] p-2">
       <img class="h-full object-contain" 
-        src="{{ filter_var($item->logo, FILTER_VALIDATE_URL) ? $item->logo : asset($item->logo) }}" alt="Company Logo">
+        src="{{ filter_var($item->logo, FILTER_VALIDATE_URL) ? $item->logo : asset('storage/' . $item->logo) }}" alt="Company Logo">
     </div>
   @endif
   <div class="p-6 text-gray-900 flex flex-col gap-3 grow">

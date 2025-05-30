@@ -6,7 +6,7 @@
         <div class="grid gap-4 justify-center sm:grid-cols-[200px_1fr] ">
           <div class="min-h-[100px] max-h-[200px] min-w-[100px] max-w-[200px]">
             <img 
-              src="{{ filter_var($company->logo, FILTER_VALIDATE_URL) ? $company->logo : asset($company->logo) }}" 
+              src="{{ filter_var($company->logo, FILTER_VALIDATE_URL) ? $company->logo : asset('storage/' . $company->logo) }}" 
               alt="{{ $company->name }} Logo"
               class="h-full object-contain m-auto" />
           </div>
