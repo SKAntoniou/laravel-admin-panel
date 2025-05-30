@@ -13,4 +13,16 @@
   </div>
   <p class="mt-1 text-sm text-gray-500" id="{{ $name }}-help">Accepted formats: PNG, JPG, or WEBP.</p>
   
+  <script>
+    // Forms
+    // File Upload
+    const fileInput = document.getElementById( 'logo' );
+    const fileInfoArea = document.getElementById( 'logo-file-name' );
+    fileInput.addEventListener( 'change', (event) => {
+      const input = event.srcElement;
+      const fileName = input.files[0].name;
+      fileInfoArea.textContent = 'File name: ' + fileName;
+    });
+  </script>
+
 </x-forms.field>

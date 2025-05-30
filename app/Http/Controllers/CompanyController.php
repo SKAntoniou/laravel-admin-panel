@@ -75,6 +75,6 @@ class CompanyController extends Controller
   public function delete(Request $request, Company $company)
   {
     $company->delete();
-    return redirect($request['redirect_to']);
+    return redirect('/');
   }
 }
