@@ -43,5 +43,16 @@
                 {{ __('Log in') }}
             </x-primary-button>
         </div>
+
     </form>
+
+    <div class="block font-medium text-sm text-gray-700 pt-4">
+        <p>
+            As this is a example project, there is a username and password setup for you.<br>
+            Username: admin@admin.com<br>
+            Password: password
+        </p>
+    </div>
+
 </x-guest-layout>
+

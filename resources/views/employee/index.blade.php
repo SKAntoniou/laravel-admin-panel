@@ -1,2 +1,2 @@
-<x-overview-layout :heading="'Employees'" :itemName="'Employee'" :itemRoute="route('employee.new')" :array="$employees" :gridBreakpoints="'md:grid-cols-2 lg:grid-cols-4'" :type="'employee'">
+<x-overview-layout :heading="'Employees'" :itemName="'Employee'" :itemRoute="route('employee.new')" :array="$employees" :gridBreakpoints="'md:grid-cols-2 lg:grid-cols-4'" :type="'employee'" :edit="true" :headerAction="'Add'"  :headerName="'Employee'">
 </x-overview-layout>

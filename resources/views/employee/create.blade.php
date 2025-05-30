@@ -23,7 +23,7 @@
 
         <div>
           <x-forms.label :name="'company_id'" :label="'Associated Company'"></x-forms.label>
-          <select name="company_id" id="company_id_id" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+          <select name="company_id" id="company_id_id" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600">
             @foreach ($companies as $company)
               <option value="{{ $company->id }}">{{ $company->name }}</option>
             @endforeach

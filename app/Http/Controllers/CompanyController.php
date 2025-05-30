@@ -5,9 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules\File;
 use App\Models\Company;
+use App\Models\Employee;
 
 class CompanyController extends Controller
 {
+  public function show(Company $company)
+  {
+    $employees = Employee::where('company_id', $company['id'])->latest()->paginate(12);
+
+    // dd($employees);
+    return view('company.show', ['company' => $company, 'employees' => $employees]);
+  }
+
   public function create()
   {
     return view('company/create');

@@ -1,10 +1,10 @@
-@props(['item', 'itemName', 'type'])
+@props(['item', 'itemName', 'type', 'edit'=>false, ])
 
 <div class="bg-white overflow-hidden shadow-sm rounded-lg flex">
   @if (!empty($item->logo))
-    <div class="min-h-[100px] h-full min-w-[100px] max-w-[200px] p-2">
+    <div class="min-h-[100px] max-h-[200px] min-w-[100px] max-w-[200px] p-2">
       <img class="h-full object-contain" 
-        src="{{ $item->logo }}" alt="Company Logo">
+        src="{{ filter_var($item->logo, FILTER_VALIDATE_URL) ? $item->logo : asset($item->logo) }}" alt="Company Logo">
     </div>
   @endif
   <div class="p-6 text-gray-900 flex flex-col gap-3 grow">
@@ -25,8 +25,13 @@
         <a class="p-3 active:scale-95 transition text-sm text-white rounded-full bg-indigo-500 hover:bg-indigo-600" 
           href="{{ $item->website }}">Visit Website</a>
       @endif
-      <a class="p-3 active:scale-95 transition text-sm text-white rounded-full bg-indigo-500 hover:bg-indigo-600"
-        href="{{ $type }}/{{ $item->id }}/edit">View {{ $itemName }}</a>
+      @if ($edit)
+        <a class="p-3 active:scale-95 transition text-sm text-white rounded-full bg-indigo-500 hover:bg-indigo-600"
+          href="/{{ $type }}/{{ $item->id }}/edit">Edit {{ $itemName }}</a>
+      @else 
+        <a class="p-3 active:scale-95 transition text-sm text-white rounded-full bg-indigo-500 hover:bg-indigo-600"
+          href="/{{ $type }}/{{ $item->id }}">View {{ $itemName }}</a>
+      @endif
     </div>
   </div>
 </div>
