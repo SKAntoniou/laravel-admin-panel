@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rules\File;
+use Illuminate\Validation\Rule;
 use App\Models\Company;
 use App\Models\Employee;
 
@@ -25,19 +27,26 @@ class CompanyController extends Controller
   public function store(Request $request)
   {
     $attributes = $request->validate([
-      'name' => ['required', 'max:254'],
-      'email' => ['required', 'email', 'unique:companies,email', 'max:254'],
-      'website' => ['required', 'max:254'],
-      'logo' => ['required', File::types(['png', 'jpg', 'webp'])]
+      'name' => ['required', 'unique:companies,name', 'max:254'],
+      'email' => ['nullable', 'email', 'unique:companies,email', 'max:254'],
+      'website' => ['nullable', 'url', 'max:254'],
+      'logo' => ['nullable', File::image()
+        ->dimensions(Rule::dimensions()->minWidth(100)->minHeight(100))]
     ]);
 
-    $logoPath = $request->logo->store('logos');
-    Company::create([
-      'name' => $attributes['name'],
-      'email' => $attributes['email'],
-      'website' => $attributes['website'],
-      'logo' => $logoPath
-    ]);
+    $validAttributes = [];
+    foreach ($attributes as $key => $value) {
+      // This is to check if logo exists and is valid. Logo needs different behaviour.
+      if ($key === 'logo') {
+        if ($value) {
+          $logoPath = $request->logo->store('logos');
+          $validAttributes[$key] = $logoPath;
+        }
+      } elseif ($value) {
+        $validAttributes[$key] = $value;
+      }
+    }
+    Company::create($validAttributes);
 
     return redirect($request['redirect_to']);
   }
@@ -52,28 +61,39 @@ class CompanyController extends Controller
     $attributes = $request->validate([
       'id' => ['required'],
       'name' => ['required', 'max:254'],
-      'email' => ['required', 'email', 'max:254'],
-      'website' => ['required', 'max:254'],
-      'logo' => [File::types(['png', 'jpg', 'webp'])]
+      'email' => ['nullable', 'email', 'max:254'],
+      'website' => ['nullable', 'url', 'max:254'],
+      'logo' => ['nullable', File::image()
+        ->dimensions(Rule::dimensions()->minWidth(100)->minHeight(100))]
     ]);
-    
-    $attributesToUpdate = [
-      'name' => $attributes['name'],
-      'email' => $attributes['email'],
-      'website' => $attributes['website'],
-    ];
-    if (array_key_exists('logo', $attributes)) {
-      $logoPath = $request->logo->store('logos');
-      $attributesToUpdate['logo'] = $logoPath;
+    $oldValues = Company::findOrFail($attributes['id']);
+
+    $validAttributes = [];
+    foreach ($attributes as $key => $value) {
+      if ($key === 'logo') {
+        if ($value) {
+          // Delete the old logo file
+          if ($oldValues->logo && Storage::exists($oldValues->logo)) {
+            Storage::delete($oldValues->logo);
+          }
+          $logoPath = $request->logo->store('logos');
+          $validAttributes[$key] = $logoPath;
+        }
+      } elseif ($value) {
+        $validAttributes[$key] = $value;
+      }
     }
-    
-    Company::where('id', $attributes['id'])->update($attributesToUpdate);
+
+    Company::where('id', $attributes['id'])->update($validAttributes);
 
     return redirect($request['redirect_to']);
   }
 
   public function delete(Request $request, Company $company)
   {
+    if ($company->logo && Storage::exists($company->logo)) {
+      Storage::delete($company->logo);
+    }
     $company->delete();
     return redirect('/');
   }
