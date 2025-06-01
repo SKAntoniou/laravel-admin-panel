@@ -4,7 +4,6 @@
       <div class="space-y-12">
 
         <h2 class="text-base/7 font-semibold text-gray-900">Add Company</h2>
-        <input type="hidden" name="redirect_to" value="{{ request('back', url()->previous()) }}">
 
         <x-forms.input label="Name" name="name" />
         <x-forms.input label="Email" name="email" type="email" />
@@ -14,7 +13,7 @@
       </div>
 
       <div class="mt-6 flex items-center justify-end gap-x-6">
-        <x-forms.button :type="'button'" :label="'Cancel'" link="{{ url()->previous() }}" />        
+        <x-forms.button :type="'button'" :label="'Cancel'" link="/" />        
         <x-forms.button :type="'submit'" :label="'Save'" />
 
       </div>

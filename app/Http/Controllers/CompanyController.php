@@ -48,7 +48,7 @@ class CompanyController extends Controller
     }
     Company::create($validAttributes);
 
-    return redirect($request['redirect_to']);
+    return redirect( route('dashboard') );
   }
 
   public function edit(Company $company)
@@ -86,7 +86,7 @@ class CompanyController extends Controller
 
     Company::where('id', $attributes['id'])->update($validAttributes);
 
-    return redirect($request['redirect_to']);
+    return redirect(route('dashboard'));
   }
 
   public function delete(Request $request, Company $company)

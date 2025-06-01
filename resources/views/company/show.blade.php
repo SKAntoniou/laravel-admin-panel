@@ -15,8 +15,8 @@
             <h4>{{ $company->email }}</h4>
             <div class="flex justify-between items-center flex-wrap">
               <h4>{{ $company->website }}</h4>
-              <a href="{{ $company->website }}" class="p-3 active:scale-95 transition text-sm text-white rounded-full bg-indigo-500 hover:bg-indigo-600">
-                Goto Website
+              <a href="{{ $company->website }}" target="_blank" class="p-3 active:scale-95 transition text-sm text-white rounded-full bg-indigo-500 hover:bg-indigo-600">
+                Go to Website
               </a>
             </div>
           </div>
@@ -31,7 +31,7 @@
         <h2 class="font-semibold text-xl leading-tight">
           Employees
         </h2>
-        <a href="{{ route('employee.new') }}" class="p-3 active:scale-95 transition text-sm text-white rounded-full bg-indigo-500 hover:bg-indigo-600">
+        <a href="{{ route( 'employee.new' ) }}" class="p-3 active:scale-95 transition text-sm text-white rounded-full bg-indigo-500 hover:bg-indigo-600">
           Add Employee
         </a>
       </div>

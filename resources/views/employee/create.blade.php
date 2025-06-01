@@ -4,7 +4,6 @@
       <div class="space-y-12">
 
         <h2 class="text-base/7 font-semibold text-gray-900">Add Employee</h2>
-        <input type="hidden" name="redirect_to" value="{{ request('back', url()->previous()) }}">
         
         @if ($companies->isEmpty())
           <div class="grid gap-2 md:grid-cols-[3fr,1fr]">
@@ -40,7 +39,7 @@
       </div>
 
       <div class="mt-6 flex items-center justify-end gap-x-6">
-        <x-forms.button :type="'button'" :label="'Cancel'" link="{{ url()->previous() }}" />        
+        <x-forms.button :type="'button'" :label="'Cancel'" link="{{ route('employees') }}" />        
         <x-forms.button :type="'submit'" :label="'Save'" />
 
       </div>

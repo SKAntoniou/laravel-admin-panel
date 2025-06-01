@@ -3,10 +3,8 @@
     <x-forms.form method="POST" action="{{ route('employee.update', ['employee' => $employee->id]) }}" enctype="multipart/form-data">
       @method('PATCH')
       <div class="space-y-12">
-
         <h2 class="text-base/7 font-semibold text-gray-900">Edit Company</h2>
         <input name="id" type="hidden" value="{{ $employee->id }}">
-        <input type="hidden" name="redirect_to" value="{{ request('back', url()->previous()) }}">
 
         <div>
           <x-forms.label :name="'company_id'" :label="'Associated Company'"></x-forms.label>
@@ -33,17 +31,17 @@
           <x-forms.button :type="'delete'" :label="'Delete'"/>  
         </div>
         <div class="flex gap-x-6 items-center">
-          <x-forms.button :type="'button'" :label="'Cancel'" link="{{ url()->previous() }}" />        
+          <x-forms.button :type="'button'" :label="'Cancel'" link="{{ route('employees') }}" />        
           <x-forms.button :type="'submit'" :label="'Update'" />
         </div>
 
       </div>
     </x-forms.form>
 
-    <form method="POST" action="{{ route('employee.delete', ['employee' => $employee->id]) }}" id="delete-form" class="hidden">
+    <form method="POST" action="{{ route('employee.delete', ['employee' => $employee->id]) }}" id="delete-form" class="hidden"
+      x-data="{ submitting: false }" @submit="submitting = true">
         @csrf
         @method('DELETE')
-        <input type="hidden" name="redirect_to" value="{{ request('back', url()->previous()) }}">
     </form>
 
   </div>

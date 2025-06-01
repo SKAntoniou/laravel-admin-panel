@@ -23,14 +23,15 @@
     <div class="flex flex-wrap gap-3">
       @if (!empty($item->website))
         <a class="p-3 active:scale-95 transition text-sm text-white rounded-full bg-indigo-500 hover:bg-indigo-600" 
-          href="{{ $item->website }}">Visit Website</a>
+          href="{{ $item->website }}" target="_blank">Visit Website</a>
       @endif
+
       @if ($edit)
         <a class="p-3 active:scale-95 transition text-sm text-white rounded-full bg-indigo-500 hover:bg-indigo-600"
-          href="/{{ $type }}/{{ $item->id }}/edit">Edit {{ $itemName }}</a>
+          href="{{ route($type . '.edit', [$item->id]) }}">Edit {{ $itemName }}</a>
       @else 
         <a class="p-3 active:scale-95 transition text-sm text-white rounded-full bg-indigo-500 hover:bg-indigo-600"
-          href="/{{ $type }}/{{ $item->id }}">View {{ $itemName }}</a>
+          href="{{ route($type . '.show', [$item->id]) }}">View {{ $itemName }}</a>
       @endif
     </div>
   </div>

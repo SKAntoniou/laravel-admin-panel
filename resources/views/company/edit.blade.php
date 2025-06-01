@@ -5,7 +5,6 @@
       <div class="space-y-12">
 
         <h2 class="text-base/7 font-semibold text-gray-900">Edit Company</h2>
-        <input type="hidden" name="redirect_to" value="{{ request('back', url()->previous()) }}">
         <input name="id" type="hidden" value="{{ $company->id }}">
 
         <x-forms.input label="Name" name="name" value="{{ $company->name }}"/>
@@ -15,7 +14,7 @@
         <div class="grid grid-cols-2">
           <div>
             <x-forms.label :label="'Current Logo'" :name="''"></x-forms.label>
-            <img src="{{ asset($company->logo) }}" alt="{{ $company->name }} logo" 
+            <img src="{{ filter_var($company->logo, FILTER_VALIDATE_URL) ? $company->logo : asset('storage/' . $company->logo) }}" alt="{{ $company->name }} logo" 
               class="max-h-[400px] max-w-full"/>
           </div>
           <div>
@@ -29,17 +28,17 @@
           <x-forms.button :type="'delete'" :label="'Delete'"/>  
         </div>
         <div class="flex gap-x-6 items-center">
-          <x-forms.button :type="'button'" :label="'Cancel'" link="{{ url()->previous() }}" />        
+          <x-forms.button :type="'button'" :label="'Cancel'" :link="route('company.show', ['company' => $company->id])" />        
           <x-forms.button :type="'submit'" :label="'Update'" />
         </div>
 
       </div>
     </x-forms.form>
 
-    <form method="POST" action="{{ route('company.delete', ['company' => $company->id]) }}" id="delete-form" class="hidden">
+    <form method="POST" action="{{ route('company.delete', ['company' => $company->id]) }}" id="delete-form" class="hidden"
+      x-data="{ submitting: false }" @submit="submitting = true">
         @csrf
         @method('DELETE')
-        <input type="hidden" name="redirect_to" value="{{ request('back', url()->previous()) }}">
     </form>
 
   </div>
