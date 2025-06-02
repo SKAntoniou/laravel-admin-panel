@@ -13,9 +13,11 @@
 
         <div class="grid grid-cols-2">
           <div>
-            <x-forms.label :label="'Current Logo'" :name="''"></x-forms.label>
-            <img src="{{ filter_var($company->logo, FILTER_VALIDATE_URL) ? $company->logo : asset('storage/' . $company->logo) }}" alt="{{ $company->name }} logo" 
-              class="max-h-[400px] max-w-full"/>
+            @if (!empty($item->logo) && $item->logo)
+              <x-forms.label :label="'Current Logo'" :name="''"></x-forms.label>
+              <img src="{{ filter_var($company->logo, FILTER_VALIDATE_URL) ? $company->logo : asset('storage/' . $company->logo) }}" alt="{{ $company->name }} logo" 
+                class="max-h-[400px] max-w-full"/>
+            @endif
           </div>
           <div>
             <x-forms.file-upload :labelTop="'Upload logo'" :labelBtn="'Choose File'" :name="'logo'" />

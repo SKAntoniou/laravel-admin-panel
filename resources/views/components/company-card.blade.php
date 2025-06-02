@@ -1,7 +1,8 @@
 @props(['item', 'itemName', 'type', 'edit'=>false, ])
 
 <div class="bg-white overflow-hidden shadow-sm rounded-lg flex">
-  @if (!empty($item->logo))
+
+  @if (!empty($item->logo) && $item->logo)
     <div class="min-h-[100px] max-h-[200px] min-w-[100px] max-w-[200px] p-2">
       <img class="h-full object-contain" 
         src="{{ filter_var($item->logo, FILTER_VALIDATE_URL) ? $item->logo : asset('storage/' . $item->logo) }}" alt="Company Logo">

@@ -79,7 +79,8 @@ class CompanyController extends Controller
           $logoPath = $request->logo->store('logos');
           $validAttributes[$key] = $logoPath;
         }
-      } elseif ($value) {
+      } else {
+        // Else does not have a check for value on update as will want to be able to delete fields.
         $validAttributes[$key] = $value;
       }
     }

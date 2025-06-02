@@ -4,12 +4,14 @@
     <div class="py-6">
       <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
         <div class="grid gap-4 justify-center sm:grid-cols-[200px_1fr] ">
-          <div class="min-h-[100px] max-h-[200px] min-w-[100px] max-w-[200px]">
-            <img 
-              src="{{ filter_var($company->logo, FILTER_VALIDATE_URL) ? $company->logo : asset('storage/' . $company->logo) }}" 
-              alt="{{ $company->name }} Logo"
-              class="h-full object-contain m-auto" />
-          </div>
+          @if (!empty($item->logo) && $item->logo)
+            <div class="min-h-[100px] max-h-[200px] min-w-[100px] max-w-[200px]">
+              <img 
+                src="{{ filter_var($company->logo, FILTER_VALIDATE_URL) ? $company->logo : asset('storage/' . $company->logo) }}" 
+                alt="{{ $company->name }} Logo"
+                class="h-full object-contain m-auto" />
+            </div>
+          @endif
           <div class="grow flex flex-col gap-2 ">
             <h2 class="text-lg font-semibold">{{ $company->name }}</h2>
             <h4>{{ $company->email }}</h4>
